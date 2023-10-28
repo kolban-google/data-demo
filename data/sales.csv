@@ -1,0 +1,9 @@
+date,cust_id,item,quantity,unit_price,revenue
+2023-09-15,1,Red Widget,5,1.23,6.15
+2023-09-16,2,Red Widget,9,1.23,11.07
+2023-09-17,3,Blue Widget,2,2.34,4.68
+2023-09-17,4,Red Widget,5,1.23,6.15
+2023-09-18,99,Green Widget,12,3.46,41.52
+2023-09-19,5,Green Widget,5,3.46,17.3
+2023-09-19,6,Yellow Widget,7,1.23,8.61
+2023-09-19,2,Blue Widget,8,2.34,18.72
