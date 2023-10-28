@@ -334,3 +334,6 @@ test13:
 	gcloud dataplex tasks list --lake=my-business-4 \
 		--location=$(LOCATION) \
 		--project=$(PROJECT_ID)	
+
+git-commit:
+	git commit -m "$(shell date)"
