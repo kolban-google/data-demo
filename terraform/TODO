@@ -1,0 +1,2 @@
+* If we do not supply a value of the Terraform variable called GROUP_HIGH_SECURITY then we
+should ignore/skip the Policy Tag definitions.

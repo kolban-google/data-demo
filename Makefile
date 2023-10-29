@@ -46,6 +46,7 @@ enable-services:
 		bigquerystorage.googleapis.com \
 		datalineage.googleapis.com \
 		pubsub.googleapis.com \
+		bigquerydatapolicy.googleapis.com \
 		--project=$(PROJECT_ID)
 
 create-bq-resources:

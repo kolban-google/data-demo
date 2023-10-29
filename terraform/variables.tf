@@ -21,3 +21,12 @@ variable "ZONE" {
 variable "LOCATION" {
   type = string
 }
+
+variable "GROUP_HIGH_SECURITY" {
+  type = string
+}
+
+# The identity of an unprivilleged BQ user.
+variable "USER_BQ_USER" {
+  type = string
+}

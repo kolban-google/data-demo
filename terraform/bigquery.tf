@@ -24,9 +24,56 @@ resource "google_bigquery_table" "sales" {
 } // google_bigquery_table.sales
 
 
+# Create the customers table
+# This depends on a policy tag.
 resource "google_bigquery_table" "customers" {
   dataset_id = google_bigquery_dataset.customers.dataset_id
   table_id   = "customers"
+  schema     = <<EOF
+[
+  {
+    "name": "cust_id",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "Customer Id"
+  },
+  {
+    "name": "name",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Customer name"
+  },
+  {
+    "name": "address",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Customer name"
+  },
+  {
+    "name": "email",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Customer email",
+    "policyTags":{
+      "names": [
+        "${google_data_catalog_policy_tag.high.id}"
+      ]
+    }
+  },
+  {
+    "name": "ccard",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Credit card nubmer",
+    "policyTags":{
+      "names": [
+        "${google_data_catalog_policy_tag.ccard.id}"
+      ]
+    }
+  }
+]
+EOF
+  depends_on = [google_data_catalog_policy_tag.high]
 } // google_bigquery_table.customers
 
 
@@ -44,7 +91,7 @@ resource "google_storage_bucket_object" "sales_data" {
   bucket       = google_storage_bucket.tmp.name
 } // google_storage_bucket_object.sales_data
 
-
+# To reload the bucket with the local data, run "terraform taint google_storage_bucket_object.customers_data"
 resource "google_storage_bucket_object" "customers_data" {
   name         = "customers.csv"
   source       = "../data/customers.csv"
@@ -74,12 +121,12 @@ resource "google_bigquery_job" "sales_load" {
     }
 
     skip_leading_rows = 1
-    autodetect        = true
+    #autodetect        = true
     write_disposition = "WRITE_TRUNCATE"
   }
 } // google_bigquery_job.sales_load
 
-
+# To force a reload of the customers data, run: "terraform taint random_uuid.customers_load"
 resource "random_uuid" "customers_load" {
 } // random_uuid.customers_load
 
@@ -98,6 +145,8 @@ resource "google_bigquery_job" "customers_load" {
     }
 
     skip_leading_rows = 1
-    autodetect        = true
+    #autodetect        = true
+    write_disposition = "WRITE_TRUNCATE"
   }
+  depends_on = [ google_bigquery_table.customers, google_storage_bucket_object.customers_data ]
 } // google_bigquery_job.customers_load

@@ -24,4 +24,7 @@ resource "google_project_service" "bigquerystorage" {
 resource "google_project_service" "datalineage" {
   service = "datalineage.googleapis.com"
 }
+resource "google_project_service" "bigquerydatapolicy" {
+  service = "bigquerydatapolicy.googleapis.com"
+}
 */

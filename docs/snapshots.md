@@ -1,5 +1,7 @@
 # BigQuery Snapshots and Clones
+
 ## Snapshots
+
 In this demo we will illustrate BigQuery snapshots.
 
 1. Go to the BigQuery console.
@@ -7,7 +9,6 @@ In this demo we will illustrate BigQuery snapshots.
 3. Select the `sales` table.
 4. Click the **SNAPSHOT** button in the menu.
 5. Click **SAVE**.
-
 
 Now we will see that there is a new snapshot table called `sales-<DATE_TIME>`.
 
@@ -23,10 +24,11 @@ Now let's update some data.
 
 ```
 INSERT sales_ds.sales VALUES
-  ('2023-10-28', 1, 'Green Widget', 9, 1.00, 9.00)
+  ('2023-10-28', 1, 'Green Widget', 9, 1.00, 9.00);
 ```
+
 3. Query the base table and see that the new row **is** in the table.
-3. Query the snapshot table and see that the new row is **not** in there.
+4. Query the snapshot table and see that the new row is **not** in there.
 
 What this shows is that we have taken a snapshot (copy) of the table.
 
@@ -37,6 +39,7 @@ Let's restore the table.
 3. Query the `sales` table and show that the previously inserted row is no longer present.
 
 ## Clones
+
 Now we will look at clones.
 
 1. Run the following DDL:
