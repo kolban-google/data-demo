@@ -27,4 +27,7 @@ resource "google_project_service" "datalineage" {
 resource "google_project_service" "bigquerydatapolicy" {
   service = "bigquerydatapolicy.googleapis.com"
 }
+resource "google_project_service" "bigquerydatapolicy" {
+  service = "dlp.googleapis.com"
+}
 */

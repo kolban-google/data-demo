@@ -47,9 +47,10 @@ resource "google_bigquery_datapolicy_data_policy" "data_policy" {
   }
 } // google_bigquery_datapolicy_data_policy.data_policy
 
+
 resource "google_bigquery_datapolicy_data_policy_iam_policy" "ccard" {
     policy_data = data.google_iam_policy.secure_authorized_masked.policy_data
     data_policy_id = google_bigquery_datapolicy_data_policy.data_policy.id
-}
+} // google_bigquery_datapolicy_data_policy_iam_policy.ccard
 
 
